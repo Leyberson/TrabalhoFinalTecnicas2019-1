@@ -1,3 +1,5 @@
+package trabalhofinal.view;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
