@@ -1,4 +1,4 @@
-package model;
+package trablahofinal.model;
 
 class Usuario implements java.io.Seriaziable{
     protected String login;
