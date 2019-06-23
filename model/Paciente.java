@@ -7,3 +7,4 @@ class Paciente extends Usuario{
 	}
 
 }
+
