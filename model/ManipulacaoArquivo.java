@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public final class ManipulacaoArquivo{
 	public static ManipulacaoArquivo instacia;
 	public ArrayList<Usuario> lista = new ArrayList<Usuario>();
+	public ArrayList<Consulta> consultas = new ArrayList<Consulta>();
 	public String caminho = "dados.tmp";
 
 	private ManipulacaoArquivo(){
@@ -20,6 +21,7 @@ public final class ManipulacaoArquivo{
 				ObjectInputStream ois = new ObjectInputStream(fis);
 
 				lista = (ArrayList<Usuario>) ois.readObject();
+				consultas = (ArrayList<Consulta>) ois.readObject();
 
 				ois.close();
 				fis.close();
@@ -39,6 +41,7 @@ public final class ManipulacaoArquivo{
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(this.lista);
+			oos.writeObject(this.consultas);
 
 			oos.close();
 			fos.close();
