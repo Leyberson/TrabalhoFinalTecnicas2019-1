@@ -1,6 +1,6 @@
 package model;
 
-class Usuario implements java.io.Seriaziable{
+class Usuario implements java.io.Serializable{
     protected String login;
     protected String senha;
 

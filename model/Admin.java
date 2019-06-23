@@ -6,5 +6,4 @@ class Admin extends Atendente{
         super("admin", "admin");
     }
 
-    
 }
