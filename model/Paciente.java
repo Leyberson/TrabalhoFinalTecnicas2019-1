@@ -1,4 +1,4 @@
-package trabalhofinal.model;
+package model;
 
 class Paciente extends Usuario{
 

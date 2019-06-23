@@ -1,4 +1,4 @@
-package trabalhofinal.view;
+package view;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;

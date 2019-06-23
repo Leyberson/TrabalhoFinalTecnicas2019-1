@@ -1,4 +1,4 @@
-package trabalhofinal.view;
+package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
