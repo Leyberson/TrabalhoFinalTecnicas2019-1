@@ -6,5 +6,11 @@ class Paciente extends Usuario{
 		super(login, senha);
 	}
 
+	public void logar(String login, String senha){
+		if(this.getLogin().equalsIgnoreCase(login) && this.senha.equals(senha)){
+			TelaUsuario tusr = new TelaUsuario();
+		}
+	}
+
 }
 

@@ -1,5 +1,8 @@
 package view;
 
+import controller.*;
+import model.*;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
@@ -74,21 +77,25 @@ public class Login extends Application {
     
     
     private void logar(){
-        if (txLogin.getText().equals("usr")) {
-            System.out.println("Tela Usuario");
-            TelaUsuario tUsr = new TelaUsuario();
-            stage.close();
-        }
-        if (txLogin.getText().equals("atd")) {
-            System.out.println("Tela Atendente");
-            TelaAtendente tAtd = new TelaAtendente();
-            stage.close();
-        }
-        if (txLogin.getText().equals("admin")) {
-            System.out.println("Tela Admin");
-            TelaAdmin tAdm = new TelaAdmin();
-            stage.close();
-        }
+        // if (txLogin.getText().equals("usr")) {
+        //     System.out.println("Tela Usuario");
+        //     TelaUsuario tUsr = new TelaUsuario();
+        //     stage.close();
+        // }
+        // if (txLogin.getText().equals("atd")) {
+        //     System.out.println("Tela Atendente");
+        //     TelaAtendente tAtd = new TelaAtendente();
+        //     stage.close();
+        // }
+        // if (txLogin.getText().equalsIgnoreCase("admin") && txSenha.getText().equals("admin")) {
+        //     System.out.println("Tela Admin");
+        //     TelaAdmin tAdm = new TelaAdmin();
+        //     stage.close();
+        // }
+
+        
+
+
     }
     public static Stage getStage() {
         return stage;
