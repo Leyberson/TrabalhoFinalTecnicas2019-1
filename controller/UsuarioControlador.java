@@ -3,14 +3,15 @@ package controller;
 import model.*;
 import view.*;
 
+import java.util.*;
+
 public class UsuarioControlador{
 
-    ArrayList<Usuario> usuarios;
+    ManipulacaoArquivo ma = ManipulacaoArquivo.getInstancia();
+    ArrayList<Usuario> usuarios = ma.lista;
 
-    public void logar(String login, String senha){
-        ManipulacaoArquivo dados = ManipulacaoArquivo.getInstance();
-        usuarios = dados.lista;
-        if(usuarios.contain(new Usuario(login, senha))){
+    public void logar(String nome, String login, String senha){
+        if(usuarios.contains(new Paciente(nome, login, senha))){
             
         }
     }

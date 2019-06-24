@@ -85,9 +85,8 @@ public class Login extends Application {
         btEntrar.setLayoutX(111);
         btEntrar.setLayoutY(268);
         
-        alert.setTitle("Senha Incorreta");
-        alert.setHeaderText("Insira uma nova senha");
-        // alert.setContentText("aaaaaa");
+        alert.setTitle("Erro ao logar");
+        alert.setHeaderText("Login e/ou senha incorretos");
     }
     
     
@@ -115,7 +114,7 @@ public class Login extends Application {
             alert.showAndWait();
             txLogin.clear();
             txSenha.clear();
-            //aparece aviso de Usuario/senha invalidos
+            //aparece aviso de Usuario e/ou senha invalidos
         }
 
     }

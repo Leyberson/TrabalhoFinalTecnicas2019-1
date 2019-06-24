@@ -6,8 +6,10 @@ import controller.*;
 public abstract class Usuario implements java.io.Serializable{
     protected String login;
     protected String senha;
+    protected String nome;
 
-    public Usuario(String login, String senha){
+    public Usuario(String nome,String login, String senha){
+        this.nome = nome;
         this.login = login;
         this.senha = senha;
     }

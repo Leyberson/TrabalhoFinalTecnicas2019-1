@@ -5,8 +5,8 @@ import controller.*;
 
 public class Atendente extends Usuario{
   
-	public Atendente(String login, String senha){
-		super(login, senha);
+	public Atendente(String nome, String login, String senha){
+		super(nome, login, senha);
 	}
 
 	public boolean logar(String login, String senha) throws Exception{

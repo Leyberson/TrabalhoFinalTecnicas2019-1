@@ -5,8 +5,8 @@ import controller.*;
 
 public class Medico extends Usuario{
 
-	public Medico(String login, String senha){
-		super(login, senha);
+	public Medico(String nome, String login, String senha){
+		super(nome, login, senha);
 	}
 
 	//devido a falta de tela de medico isso sera alterado depois

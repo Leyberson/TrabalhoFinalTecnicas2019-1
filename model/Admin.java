@@ -6,7 +6,7 @@ import controller.*;
 public class Admin extends Atendente{
    
     public Admin(){
-        super("admin", "admin");
+        super("admin", "admin", "admin");
     }
 
     public boolean logar(String login, String senha) throws Exception{
