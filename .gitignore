@@ -1,0 +1,5 @@
+#ignora todos os arquivos ja compilados
+*.class
+
+#ignora a pasta .idea
+.idea/
