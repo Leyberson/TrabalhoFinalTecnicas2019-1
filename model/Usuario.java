@@ -1,6 +1,9 @@
 package model;
 
-class Usuario implements java.io.Serializable{
+import view.*;
+import controller.*;
+
+public abstract class Usuario implements java.io.Serializable{
     protected String login;
     protected String senha;
 
@@ -13,6 +16,8 @@ class Usuario implements java.io.Serializable{
     public boolean equals(Usuario outra){
         return this.getLogin().equalsIgnoreCase(outra.getLogin());
     }
+
+    public abstract boolean logar(String login, String senha) throws Exception;
 
     public String getLogin(){
         return this.login;

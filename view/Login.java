@@ -22,7 +22,8 @@ public class Login extends Application {
     private PasswordField txSenha;
     private Button btEntrar;
     private static Stage stage;
-    
+
+    LoginControlador lc = new LoginControlador("","");    
     
     @Override
     public void start(Stage stage) {
@@ -93,8 +94,12 @@ public class Login extends Application {
         //     stage.close();
         // }
 
-        
-
+        lc.setLoginSenha(txLogin.getText(), txSenha.getText());
+        if(lc.logar()){
+            stage.close();
+        }else{
+            //aparece aviso de Usuario/senha invalidos
+        }
 
     }
     public static Stage getStage() {
