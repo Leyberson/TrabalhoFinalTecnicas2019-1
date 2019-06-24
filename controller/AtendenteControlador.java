@@ -19,4 +19,9 @@ public class AtendenteControlador{
         dados.escreverNoArquivo();
         return true;
     }
+
+    public ArrayList<Usuario> lerPaciente(){
+        retrun this.usuarios;
+    }
+    
 }
