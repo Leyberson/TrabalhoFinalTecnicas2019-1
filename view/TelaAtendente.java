@@ -1,3 +1,8 @@
+package view;
+
+import model.*;
+import controller.*;
+
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 //tela atendente decora a de usuarui já que tem as msm fucionalidades
 //adicionando adicionando cadastrar e deletar consulta, e cadastrar e deletar paciente
 
@@ -29,6 +36,10 @@ public class TelaAtendente extends TelaUsuario{
     protected ComboBox cbPacientes, cbMedicos;
     
     protected VBox vBoxMedPacCB;
+
+    private Alert alert;
+
+    AtendenteControlador ac = new AtendenteControlador();
     
     @Override
     public void start(Stage stage) {
@@ -100,6 +111,9 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacCB.getChildren().addAll(cbPacientes, cbMedicos, 
                 txDataConsulta);
         
+        // Alertas
+        alert = new Alert(AlertType.WARNING);
+        
         // Incrementação do Menu
         vBoxMenu.getChildren().addAll(btConsultas, btTelaCadastrarConsulta,
                 btTelaPaciente);
@@ -165,7 +179,16 @@ public class TelaAtendente extends TelaUsuario{
         });
         
         btCadastrarPaciente.setOnAction((ActionEvent event) -> {
-            System.out.println("Paciente Cadastrado");
+            //cadastrar paciente
+            if(ac.cadastrarPaciente(txCadastrarNomePaciente.getText(), txCadastrarLoginPaciente.getText(), txCadastrarSenhaPaciente.getText())){
+                System.out.println("Paciente Cadastrado");
+            }else{
+                alert.showAndWait();
+                txCadastrarNomePaciente.clear();
+                txCadastrarLoginPaciente.clear();
+                txCadastrarSenhaPaciente.clear();
+                //aparece aviso de Usuario cadastrado
+            }
         });
         
         btDeletarPaciente.setOnAction((ActionEvent event) -> {
@@ -233,6 +256,10 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacCB.setLayoutX(194);
         vBoxMedPacCB.setLayoutY(33);
         vBoxMedPacCB.setSpacing(10);
+
+        // alert
+        alert.setTitle("Erro ao cadastrar");
+        alert.setHeaderText("Usuario ja existente");
         
     }
     
