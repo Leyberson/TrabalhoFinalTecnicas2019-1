@@ -132,7 +132,7 @@ public class TelaAdmin extends TelaAtendente{
         //botao de deletar funcionario
         btDeletarFuncionario.setOnAction((ActionEvent event) -> {
             if(admControl.deletarFuncionario(txDeletarFuncionario.getText())){
-                System.out.println("Paciente Deletado");
+                System.out.println("Funcionario Deletado");
             }else{
                 System.out.println("Funcionario inexistente");
             }
