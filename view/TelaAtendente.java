@@ -192,7 +192,11 @@ public class TelaAtendente extends TelaUsuario{
         });
         
         btDeletarPaciente.setOnAction((ActionEvent event) -> {
-            System.out.println("Paciente Deletado");
+            if(ac.deletarPaciente(txDeletarPaciente.getText())){
+                System.out.println("Paciente Deletado");
+            }else{
+                System.out.println("paciente inexistente");
+            }
         });
     }
     //view das interações com o paciente

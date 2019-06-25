@@ -21,7 +21,19 @@ public class AtendenteControlador{
     }
 
     public ArrayList<Usuario> lerPaciente(){
-        retrun this.usuarios;
+        return this.usuarios;
+    }
+
+    public boolean deletarPaciente(String login){
+        for(Usuario c : usuarios){
+            if (c.equals(new Paciente("", login, "")) && (c instanceof Paciente)){
+                usuarios.remove(c);
+                dados.lista = usuarios;
+                dados.escreverNoArquivo();
+                return true;
+            }
+        }
+        return false;
     }
     
 }
