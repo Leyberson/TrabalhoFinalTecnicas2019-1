@@ -39,7 +39,8 @@ public class TelaAtendente extends TelaUsuario{
     
     protected VBox vBoxMedPacCB, vBoxMedPacDC;
 
-    private Alert alert;
+    private Alert alertCadastradoPaciente, alertPacienteDeletado,
+            alertCadastrado, alertDeletado;
 
     AtendenteControlador ac = new AtendenteControlador();
     
@@ -136,7 +137,10 @@ public class TelaAtendente extends TelaUsuario{
                 txDataAnoConsulta, txDataHoraConsulta);
         
         // Alertas
-        alert = new Alert(AlertType.WARNING);
+        alertCadastradoPaciente = new Alert(AlertType.WARNING);
+        alertPacienteDeletado = new Alert(AlertType.WARNING);
+        alertCadastrado = new Alert(AlertType.INFORMATION);
+        alertDeletado = new Alert(AlertType.INFORMATION);
         
         // Incrementação do Menu
         vBoxMenu.getChildren().addAll(btVisualizarConsultas, btTelaConsulta,
@@ -224,21 +228,25 @@ public class TelaAtendente extends TelaUsuario{
             if(ac.cadastrarPaciente(txCadastrarNomePaciente.getText(), 
                     txCadastrarLoginPaciente.getText(), 
                     txCadastrarSenhaPaciente.getText())){
-                System.out.println("Paciente Cadastrado");
+                alertCadastrado.showAndWait();
+                txCadastrarNomePaciente.clear();
+                txCadastrarLoginPaciente.clear();
+                txCadastrarSenhaPaciente.clear();                
             }else{
-                alert.showAndWait();
+                alertCadastradoPaciente.showAndWait();
                 txCadastrarNomePaciente.clear();
                 txCadastrarLoginPaciente.clear();
                 txCadastrarSenhaPaciente.clear();
-                //aparece aviso de Usuario cadastrado (implementar)
             }
         });
         
         btDeletarPaciente.setOnAction((ActionEvent event) -> {
             if(ac.deletarPaciente(txDeletarPaciente.getText())){
-                System.out.println("Paciente Deletado");
+                alertDeletado.showAndWait();
+                txDeletarPaciente.clear();
             }else{
-                System.out.println("paciente inexistente");
+                alertPacienteDeletado.showAndWait();
+                txDeletarPaciente.clear();
             }
         });
     }
@@ -331,9 +339,18 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacDC.setLayoutY(33);
         vBoxMedPacDC.setSpacing(10);
 
-        // alert
-        alert.setTitle("Erro ao cadastrar");
-        alert.setHeaderText("Usuario ja existente");
+        // alerts
+        alertCadastradoPaciente.setTitle("Erro ao Cadastrar");
+        alertCadastradoPaciente.setHeaderText("Usuario ja existente!");
+        
+        alertCadastrado.setTitle("Cadastro");
+        alertCadastrado.setHeaderText("Usuario cadastrado com sucesso!");
+        
+        alertDeletado.setTitle("Deletado");
+        alertDeletado.setHeaderText("Usuario deletado com sucesso!");
+        
+        alertPacienteDeletado.setTitle("Erro ao Deletar");
+        alertPacienteDeletado.setHeaderText("Usuario inexistente!");
         
     }
     

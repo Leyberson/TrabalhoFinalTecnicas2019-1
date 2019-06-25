@@ -13,6 +13,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class TelaAdmin extends TelaAtendente{
     protected AnchorPane 
@@ -27,6 +29,9 @@ public class TelaAdmin extends TelaAtendente{
     protected PasswordField txCadastrarSenhaFuncionario;
     
     protected ComboBox cbCargo;
+    
+    private Alert alertCadastrado, alertDeletado, alertFuncionarioCadastrado,
+            alertFuncionarioDeletado;
 
     AdminControlador admControl = new AdminControlador();
     
@@ -78,6 +83,12 @@ public class TelaAdmin extends TelaAtendente{
         
         cbCargo = new ComboBox(cargos);
         
+        // alerts
+        alertFuncionarioCadastrado = new Alert(AlertType.WARNING);
+        alertFuncionarioDeletado = new Alert(AlertType.WARNING);
+        alertCadastrado = new Alert(AlertType.INFORMATION);
+        alertDeletado = new Alert(AlertType.INFORMATION);        
+        
         // incrementação VBox
         vBoxMenu.getChildren().addAll(btTelaFuncionario);
 
@@ -119,17 +130,19 @@ public class TelaAdmin extends TelaAtendente{
         
         //botao cadastrar funcionario
         btCadastrarFuncionario.setOnAction((ActionEvent event) -> {
-
-            System.out.println(cbCargo.getUserAgentStylesheet() + " cadastrado");
+            alertCadastrado.showAndWait();
         });
+        //Falta (implementar) o WARNING quando existir um mesmo funcionário cadastrado;
         
 
         //botao de deletar funcionario
         btDeletarFuncionario.setOnAction((ActionEvent event) -> {
             if(admControl.deletarFuncionario(txDeletarFuncionario.getText())){
-                System.out.println("Paciente Deletado");
+                alertDeletado.showAndWait();
+                txDeletarFuncionario.clear();
             }else{
-                System.out.println("paciente inexistente");
+                alertFuncionarioDeletado.showAndWait();
+                txDeletarFuncionario.clear();
             }
         });
     }
@@ -174,6 +187,20 @@ public class TelaAdmin extends TelaAtendente{
         cbCargo.setPrefWidth(150);
         cbCargo.setLayoutX(200);
         cbCargo.setLayoutY(40);
+        
+        // Alerts
+        alertFuncionarioCadastrado.setTitle("Erro ao Cadastrar");
+        alertFuncionarioCadastrado.setHeaderText("Funcionario ja existente!");
+        
+        alertCadastrado.setTitle("Cadastro");
+        alertCadastrado.setHeaderText("Funcionario cadastrado com sucesso!");
+        
+        alertDeletado.setTitle("Deletado");
+        alertDeletado.setHeaderText("Funcionario deletado com sucesso!");
+        
+        alertFuncionarioDeletado.setTitle("Erro ao Deletar");
+        alertFuncionarioDeletado.setHeaderText("Funcionario inexistente!");
+        
     }
     
     public TelaAdmin(){
