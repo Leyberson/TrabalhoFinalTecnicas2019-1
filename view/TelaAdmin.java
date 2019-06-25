@@ -119,8 +119,13 @@ public class TelaAdmin extends TelaAtendente{
         
         //botao cadastrar funcionario
         btCadastrarFuncionario.setOnAction((ActionEvent event) -> {
-
-            System.out.println(cbCargo.getUserAgentStylesheet() + " cadastrado");
+            if(cbCargo.getValue() != null && admControl.cadastrarFuncionario((String)cbCargo.getValue(), txCadastrarNomeFuncionario.getText(), txCadastrarLoginFuncionario.getText(), txCadastrarSenhaFuncionario.getText())){
+               System.out.println(cbCargo.getValue() +"Cadastrado");
+            } else if(cbCargo.getValue() == null){
+                System.out.println("Por favor escolha o tipo de funcionario");
+            } else {
+                System.out.println("Usuario ja existe");
+            }
         });
         
 
@@ -129,7 +134,7 @@ public class TelaAdmin extends TelaAtendente{
             if(admControl.deletarFuncionario(txDeletarFuncionario.getText())){
                 System.out.println("Paciente Deletado");
             }else{
-                System.out.println("paciente inexistente");
+                System.out.println("Funcionario inexistente");
             }
         });
     }
