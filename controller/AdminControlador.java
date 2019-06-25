@@ -23,7 +23,9 @@ public class AdminControlador extends AtendenteControlador{
 
 	public boolean deletarFuncionario(String login){
         for(Usuario c : usuarios){
-            if (c.equals(new Atendente("", login, "")) && ((c instanceof Atendente) || (c instanceof Medico)){
+
+            if (c.equals(new Atendente("", login, "")) && ((c instanceof Atendente) || (c instanceof Medico))){
+
                 usuarios.remove(c);
                 dados.lista = usuarios;
                 dados.escreverNoArquivo();
