@@ -1,3 +1,8 @@
+package view;
+
+import controller.*;
+import model.*;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +27,8 @@ public class TelaAdmin extends TelaAtendente{
     protected PasswordField txCadastrarSenhaFuncionario;
     
     protected ComboBox cbCargo;
+
+    AdminControlador admControl = new AdminControlador();
     
     @Override
     public void start(Stage stage) {
@@ -110,12 +117,20 @@ public class TelaAdmin extends TelaAtendente{
         
         // Ações dos botões
         
+        //botao cadastrar funcionario
         btCadastrarFuncionario.setOnAction((ActionEvent event) -> {
+
             System.out.println(cbCargo.getUserAgentStylesheet() + " cadastrado");
         });
         
+
+        //botao de deletar funcionario
         btDeletarFuncionario.setOnAction((ActionEvent event) -> {
-            System.out.println("Funcionario Deletado");
+            if(admControl.deletarFuncionario(txDeletarFuncionario.getText())){
+                System.out.println("Paciente Deletado");
+            }else{
+                System.out.println("paciente inexistente");
+            }
         });
     }
     
