@@ -31,8 +31,9 @@ public class TelaUsuario extends Application {
     protected Button btLogout, btPesquisarConsulta;
     protected TextField txFiltro;
     protected static Stage stage;
-    protected static Scene sceneUsuario, sceneCadastroConsulta, 
-            scenePaciente, sceneCadastroPaciente, sceneDeletarPaciente, 
+    //adicionado o sceneConsulta e o sceneDeletarConsulta
+    protected static Scene sceneUsuario, sceneCadastroConsulta, sceneDeletarConsulta,
+            sceneConsultar, scenePaciente, sceneCadastroPaciente, sceneDeletarPaciente, 
             sceneFuncionario, sceneCadastroFuncionario, sceneDeletarFuncionario;
     
     @Override
@@ -139,6 +140,12 @@ public class TelaUsuario extends Application {
         switch(scr){
             case "usuario":
                 stage.setScene(sceneUsuario);
+                break;
+            case "consulta":
+                stage.setScene(sceneConsultar);
+                break;
+            case "deletarConsulta":
+                stage.setScene(sceneDeletarConsulta);
                 break;
             case "cadastroConsulta":
                 stage.setScene(sceneCadastroConsulta);

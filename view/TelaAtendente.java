@@ -14,30 +14,37 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-//tela atendente decora a de usuarui já que tem as msm fucionalidades
+
+//tela atendente decora a de usuario já que tem as msm fucionalidades
+
 //adicionando adicionando cadastrar e deletar consulta, e cadastrar e deletar paciente
 
 public class TelaAtendente extends TelaUsuario{
-    protected AnchorPane paneAtendente, 
-            paneConsulta, paneCadastroConsulta, paneDeletarConsulta, 
-            panePaciente, paneCadastroPaciente, paneDeletarPaciente;
+    protected AnchorPane paneAtendente, paneVisualizarConsulta, 
+            paneCadastroConsulta, paneDeletarConsulta, panePaciente, 
+            paneCadastroPaciente, paneDeletarPaciente, paneConsulta;
     
-    protected Button btConsultas, btCadastrarConsulta, btCadastrarPaciente,
-            btDeletarConsulta, btDeletarPaciente,
-            btTelaCadastrarConsulta, 
+    protected Button btVisualizarConsultas, btCadastrarConsulta, 
+            btCadastrarPaciente, btDeletarConsulta, btDeletarPaciente, 
+            btTelaCadastrarConsulta, btTelaDeletarConsulta, btTelaConsulta,
             btTelaPaciente, btTelaCadastrarPaciente, btTelaDeletarPaciente;
     
     protected TextField txCadastrarLoginPaciente, txCadastrarNomePaciente, 
-            txDataConsulta,
-            txDeletarPaciente;
+            txDataDia, txDataMes, txDataAno, txDataHora, txDeletarPaciente, 
+            txDataDiaConsulta, txDataMesConsulta, txDataAnoConsulta, 
+            txDataHoraConsulta;
     
     protected PasswordField txCadastrarSenhaPaciente;
     
-    protected ComboBox cbPacientes, cbMedicos;
+    protected ComboBox cbPacientes, cbMedicos, cbPacientesConsultados,
+            cbMedicosConsultados;
     
-    protected VBox vBoxMedPacCB;
 
-    private Alert alert;
+    protected VBox vBoxMedPacCB, vBoxMedPacDC;
+
+    private Alert alertCadastradoPaciente, alertPacienteDeletado,
+            alertCadastrado, alertDeletado;
+
 
     AtendenteControlador ac = new AtendenteControlador();
     
@@ -50,7 +57,9 @@ public class TelaAtendente extends TelaUsuario{
         initListenersAtendente();
         initLayoutAtendente();
         
+        sceneConsultar = new Scene(paneConsulta);
         sceneCadastroConsulta = new Scene(paneCadastroConsulta);
+        sceneDeletarConsulta = new Scene(paneDeletarConsulta);
         scenePaciente = new Scene(panePaciente);
         sceneCadastroPaciente = new Scene(paneCadastroPaciente);
         sceneDeletarPaciente = new Scene(paneDeletarPaciente);
@@ -60,6 +69,9 @@ public class TelaAtendente extends TelaUsuario{
     protected void initComponentsAtendente() {
         
         // Panes
+        paneVisualizarConsulta = new AnchorPane();
+        paneVisualizarConsulta.setPrefSize(558, 259);
+        
         paneConsulta = new AnchorPane();
         paneConsulta.setPrefSize(558, 259);
         
@@ -85,44 +97,72 @@ public class TelaAtendente extends TelaUsuario{
         
         txCadastrarSenhaPaciente = new PasswordField();
         
-        txDataConsulta = new TextField();
+        txDataDia = new TextField();
+        txDataMes = new TextField();
+        txDataAno = new TextField();
+        txDataHora = new TextField();
+        txDataDiaConsulta = new TextField();
+        txDataMesConsulta = new TextField();
+        txDataAnoConsulta = new TextField();
+        txDataHoraConsulta = new TextField();
         txDeletarPaciente = new TextField();
         
         // Buttons
-        btConsultas = new Button("Consultas");
+        btTelaConsulta = new Button("Consulta");
+        btTelaDeletarConsulta = new Button("Deletar Consulta");
+        
+        btVisualizarConsultas = new Button("Visualizar Consultas");
         btTelaCadastrarConsulta = new Button("Cadastrar Consulta");
         
         btTelaPaciente = new Button("Paciente");
         btTelaCadastrarPaciente = new Button("Cadastrar Paciente");
         btTelaDeletarPaciente = new Button("Deletar Paciente");
         
-        btCadastrarConsulta = new Button("Cadastrar Consulta");
+        btCadastrarConsulta = new Button("Cadastrar");
         btCadastrarPaciente = new Button("Pacientes");
         
-        btDeletarConsulta = new Button("Desmarcar Consulta"); 
+        btDeletarConsulta = new Button("Desmarcar"); 
         btDeletarPaciente = new Button("Deletar");
         
         // Combo Boxes
         cbPacientes = new ComboBox();
         cbMedicos = new ComboBox();
+        cbPacientesConsultados = new ComboBox();
+        cbMedicosConsultados = new ComboBox();
         
         // VBoxs
         vBoxMedPacCB = new VBox();
-        vBoxMedPacCB.getChildren().addAll(cbPacientes, cbMedicos, 
-                txDataConsulta);
+        vBoxMedPacCB.getChildren().addAll(cbPacientes, cbMedicos, txDataDia,
+                txDataMes, txDataAno, txDataHora);
+        
+        vBoxMedPacDC = new VBox();
+        vBoxMedPacDC.getChildren().addAll(cbPacientesConsultados, 
+                cbMedicosConsultados, txDataDiaConsulta, txDataMesConsulta, 
+                txDataAnoConsulta, txDataHoraConsulta);
+        
+        // Alertas
+        alertCadastradoPaciente = new Alert(AlertType.WARNING);
+        alertPacienteDeletado = new Alert(AlertType.WARNING);
+        alertCadastrado = new Alert(AlertType.INFORMATION);
+        alertDeletado = new Alert(AlertType.INFORMATION);
         
         // Alertas
         alert = new Alert(AlertType.WARNING);
         
         // Incrementação do Menu
-        vBoxMenu.getChildren().addAll(btConsultas, btTelaCadastrarConsulta,
+        vBoxMenu.getChildren().addAll(btVisualizarConsultas, btTelaConsulta,
                 btTelaPaciente);
         
         // Incrementação dos panes
-        paneUsuario.getChildren().addAll(btDeletarConsulta);
+        //paneUsuario.getChildren().addAll();
+        
+        paneConsulta.getChildren().addAll(btTelaCadastrarConsulta,
+                btTelaDeletarConsulta);
         
         paneCadastroConsulta.getChildren().addAll(vBoxMedPacCB, 
                 btCadastrarConsulta);
+        
+        paneDeletarConsulta.getChildren().addAll(vBoxMedPacDC, btDeletarConsulta);
         
         panePaciente.getChildren().addAll(btTelaCadastrarPaciente, 
                 btTelaDeletarPaciente);
@@ -138,7 +178,13 @@ public class TelaAtendente extends TelaUsuario{
     private void initListenersAtendente() {
         // Mudanças de telas
 
-        btConsultas.setOnAction((ActionEvent event) -> {
+        btTelaConsulta.setOnAction((ActionEvent event) -> {
+            if(stage.getScene() != sceneConsultar)
+                paneConsulta.getChildren().addAll(vBoxMenu);
+            mudarTela("consulta");
+        }); // novo
+        
+        btVisualizarConsultas.setOnAction((ActionEvent event) -> {
             if(stage.getScene() != sceneUsuario)
                 paneUsuario.getChildren().addAll(vBoxMenu);
             mudarTela("usuario");
@@ -148,6 +194,12 @@ public class TelaAtendente extends TelaUsuario{
             if(stage.getScene() != sceneCadastroConsulta)
                 paneCadastroConsulta.getChildren().addAll(vBoxMenu);
             mudarTela("cadastroConsulta");
+        });
+        
+        btTelaDeletarConsulta.setOnAction((ActionEvent event) -> {
+            if(stage.getScene() != sceneDeletarConsulta)
+                paneDeletarConsulta.getChildren().addAll(vBoxMenu);
+            mudarTela("deletarConsulta");
         });
         
         btTelaPaciente.setOnAction((ActionEvent event) -> {
@@ -180,22 +232,33 @@ public class TelaAtendente extends TelaUsuario{
         
         btCadastrarPaciente.setOnAction((ActionEvent event) -> {
             //cadastrar paciente
-            if(ac.cadastrarPaciente(txCadastrarNomePaciente.getText(), txCadastrarLoginPaciente.getText(), txCadastrarSenhaPaciente.getText())){
-                System.out.println("Paciente Cadastrado");
+
+            if(ac.cadastrarPaciente(txCadastrarNomePaciente.getText(), 
+                    txCadastrarLoginPaciente.getText(), 
+                    txCadastrarSenhaPaciente.getText())){
+                alertCadastrado.showAndWait();
+                txCadastrarNomePaciente.clear();
+                txCadastrarLoginPaciente.clear();
+                txCadastrarSenhaPaciente.clear();                
             }else{
-                alert.showAndWait();
+                alertCadastradoPaciente.showAndWait();
                 txCadastrarNomePaciente.clear();
                 txCadastrarLoginPaciente.clear();
                 txCadastrarSenhaPaciente.clear();
-                //aparece aviso de Usuario cadastrado
+
+
             }
         });
         
         btDeletarPaciente.setOnAction((ActionEvent event) -> {
             if(ac.deletarPaciente(txDeletarPaciente.getText())){
-                System.out.println("Paciente Deletado");
+
+                alertDeletado.showAndWait();
+                txDeletarPaciente.clear();
             }else{
-                System.out.println("paciente inexistente");
+                alertPacienteDeletado.showAndWait();
+                txDeletarPaciente.clear();
+
             }
         });
     }
@@ -214,7 +277,14 @@ public class TelaAtendente extends TelaUsuario{
         txCadastrarSenhaPaciente.setLayoutX(200);
         txCadastrarSenhaPaciente.setLayoutY(139);
         
-        txDataConsulta.setPromptText("Data");
+        txDataDia.setPromptText("Dia");
+        txDataMes.setPromptText("Mes");
+        txDataAno.setPromptText("Ano");
+        txDataHora.setPromptText("Hora");
+        txDataDiaConsulta.setPromptText("Dia");
+        txDataMesConsulta.setPromptText("Mes");
+        txDataAnoConsulta.setPromptText("Ano");
+        txDataHoraConsulta.setPromptText("Hora");
         
         txDeletarPaciente.setPromptText("Login Paciente");
         txDeletarPaciente.setLayoutX(215);
@@ -222,8 +292,18 @@ public class TelaAtendente extends TelaUsuario{
         
         // Buttons
         
+        btTelaConsulta.setPrefSize(138, 46);
+        
+        btTelaCadastrarConsulta.setPrefSize(296, 129);
+        btTelaCadastrarConsulta.setLayoutX(206);
+        btTelaCadastrarConsulta.setLayoutY(40);
+        
+        btTelaDeletarConsulta.setPrefSize(296, 129);
+        btTelaDeletarConsulta.setLayoutX(206); 
+        btTelaDeletarConsulta.setLayoutY(200); 
+       
         btCadastrarConsulta.setLayoutX(205);
-        btCadastrarConsulta.setLayoutY(150);
+        btCadastrarConsulta.setLayoutY(250);
         
         btCadastrarPaciente.setLayoutX(390);
         btCadastrarPaciente.setLayoutY(108);
@@ -231,8 +311,7 @@ public class TelaAtendente extends TelaUsuario{
         btDeletarPaciente.setLayoutX(390);
         btDeletarPaciente.setLayoutY(108);
         
-        btConsultas.setPrefSize(138, 46);
-        btTelaCadastrarConsulta.setPrefSize(138, 46);
+        btVisualizarConsultas.setPrefSize(138, 46);
         btTelaCadastrarPaciente.setPrefSize(138, 46);
         
         btTelaPaciente.setPrefSize(138, 46);
@@ -245,8 +324,8 @@ public class TelaAtendente extends TelaUsuario{
         btTelaDeletarPaciente.setLayoutX(206);
         btTelaDeletarPaciente.setLayoutY(200);
         
-        btDeletarConsulta.setLayoutX(375);
-        btDeletarConsulta.setLayoutY(58);
+        btDeletarConsulta.setLayoutX(205);
+        btDeletarConsulta.setLayoutY(250);
         
         // Combo Boxes
         cbPacientes.setPromptText("Paciente");
@@ -254,6 +333,12 @@ public class TelaAtendente extends TelaUsuario{
         
         cbMedicos.setPromptText("Médico");
         cbMedicos.setPrefWidth(150);
+        
+        cbPacientesConsultados.setPromptText("Paciente");
+        cbPacientesConsultados.setPrefWidth(150);
+        
+        cbMedicosConsultados.setPromptText("Médico");
+        cbMedicosConsultados.setPrefWidth(150);
         
         // VBoxes
         vBoxMedPacCB.setPrefSize(138, 64);
@@ -264,6 +349,24 @@ public class TelaAtendente extends TelaUsuario{
         // alert
         alert.setTitle("Erro ao cadastrar");
         alert.setHeaderText("Usuario ja existente");
+        
+        vBoxMedPacDC.setPrefSize(138, 64);
+        vBoxMedPacDC.setLayoutX(194);
+        vBoxMedPacDC.setLayoutY(33);
+        vBoxMedPacDC.setSpacing(10);
+
+        // alerts
+        alertCadastradoPaciente.setTitle("Erro ao Cadastrar");
+        alertCadastradoPaciente.setHeaderText("Usuario ja existente!");
+        
+        alertCadastrado.setTitle("Cadastro");
+        alertCadastrado.setHeaderText("Usuario cadastrado com sucesso!");
+        
+        alertDeletado.setTitle("Deletado");
+        alertDeletado.setHeaderText("Usuario deletado com sucesso!");
+        
+        alertPacienteDeletado.setTitle("Erro ao Deletar");
+        alertPacienteDeletado.setHeaderText("Usuario inexistente!");
         
     }
     
