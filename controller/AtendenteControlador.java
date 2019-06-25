@@ -35,5 +35,7 @@ public class AtendenteControlador{
         }
         return false;
     }
+
+    public boolean cadastrarConsultas()
     
 }
