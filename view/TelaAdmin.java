@@ -29,6 +29,8 @@ public class TelaAdmin extends TelaAtendente{
     protected PasswordField txCadastrarSenhaFuncionario;
     
     protected ComboBox cbCargo;
+
+    AdminControlador admControl = new AdminControlador();
     
     private Alert alertCadastrado, alertDeletado, alertFuncionarioCadastrado,
             alertFuncionarioDeletado;
@@ -130,7 +132,11 @@ public class TelaAdmin extends TelaAtendente{
         
         //botao cadastrar funcionario
         btCadastrarFuncionario.setOnAction((ActionEvent event) -> {
+
             alertCadastrado.showAndWait();
+
+            System.out.println(cbCargo.getUserAgentStylesheet() + " cadastrado");
+
         });
         //Falta (implementar) o WARNING quando existir um mesmo funcionário cadastrado;
         
@@ -138,11 +144,17 @@ public class TelaAdmin extends TelaAtendente{
         //botao de deletar funcionario
         btDeletarFuncionario.setOnAction((ActionEvent event) -> {
             if(admControl.deletarFuncionario(txDeletarFuncionario.getText())){
+
                 alertDeletado.showAndWait();
                 txDeletarFuncionario.clear();
             }else{
                 alertFuncionarioDeletado.showAndWait();
                 txDeletarFuncionario.clear();
+
+                System.out.println("Paciente Deletado");
+            }else{
+                System.out.println("paciente inexistente");
+
             }
         });
     }

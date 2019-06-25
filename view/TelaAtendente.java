@@ -14,7 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+
 //tela atendente decora a de usuario já que tem as msm fucionalidades
+
 //adicionando adicionando cadastrar e deletar consulta, e cadastrar e deletar paciente
 
 public class TelaAtendente extends TelaUsuario{
@@ -37,10 +39,12 @@ public class TelaAtendente extends TelaUsuario{
     protected ComboBox cbPacientes, cbMedicos, cbPacientesConsultados,
             cbMedicosConsultados;
     
+
     protected VBox vBoxMedPacCB, vBoxMedPacDC;
 
     private Alert alertCadastradoPaciente, alertPacienteDeletado,
             alertCadastrado, alertDeletado;
+
 
     AtendenteControlador ac = new AtendenteControlador();
     
@@ -142,6 +146,9 @@ public class TelaAtendente extends TelaUsuario{
         alertCadastrado = new Alert(AlertType.INFORMATION);
         alertDeletado = new Alert(AlertType.INFORMATION);
         
+        // Alertas
+        alert = new Alert(AlertType.WARNING);
+        
         // Incrementação do Menu
         vBoxMenu.getChildren().addAll(btVisualizarConsultas, btTelaConsulta,
                 btTelaPaciente);
@@ -225,6 +232,7 @@ public class TelaAtendente extends TelaUsuario{
         
         btCadastrarPaciente.setOnAction((ActionEvent event) -> {
             //cadastrar paciente
+
             if(ac.cadastrarPaciente(txCadastrarNomePaciente.getText(), 
                     txCadastrarLoginPaciente.getText(), 
                     txCadastrarSenhaPaciente.getText())){
@@ -237,16 +245,20 @@ public class TelaAtendente extends TelaUsuario{
                 txCadastrarNomePaciente.clear();
                 txCadastrarLoginPaciente.clear();
                 txCadastrarSenhaPaciente.clear();
+
+
             }
         });
         
         btDeletarPaciente.setOnAction((ActionEvent event) -> {
             if(ac.deletarPaciente(txDeletarPaciente.getText())){
+
                 alertDeletado.showAndWait();
                 txDeletarPaciente.clear();
             }else{
                 alertPacienteDeletado.showAndWait();
                 txDeletarPaciente.clear();
+
             }
         });
     }
@@ -333,6 +345,10 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacCB.setLayoutX(194);
         vBoxMedPacCB.setLayoutY(33);
         vBoxMedPacCB.setSpacing(10);
+
+        // alert
+        alert.setTitle("Erro ao cadastrar");
+        alert.setHeaderText("Usuario ja existente");
         
         vBoxMedPacDC.setPrefSize(138, 64);
         vBoxMedPacDC.setLayoutX(194);
