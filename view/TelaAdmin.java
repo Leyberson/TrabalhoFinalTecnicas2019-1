@@ -1,6 +1,6 @@
 package view;
 
-import controlle.*;
+import controller.*;
 import model.*;
 
 import javafx.collections.FXCollections;
