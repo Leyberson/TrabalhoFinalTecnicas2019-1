@@ -8,6 +8,7 @@ import java.util.*;
 public class AtendenteControlador{
     ManipulacaoArquivo dados = ManipulacaoArquivo.getInstancia();
     ArrayList<Usuario> usuarios = dados.lista;
+    ArrayList<Consulta> consultas = dados.consultas;
 
     public boolean cadastrarPaciente(String nome, String login, String senha){
         for(Usuario c : usuarios){
@@ -36,6 +37,10 @@ public class AtendenteControlador{
         return false;
     }
 
-    public boolean cadastrarConsultas()
+    public boolean cadastrarConsultas(String pacienteLogin, String medicoLogin, int dia, int mes, int ano, int hora){
+        for(Consulta c : consultas){
+            if(c.equals(new Consulta(String pacienteLogin, String medicoLogin, int dia, int mes, int ano, int hora)))
+        }
+    }
     
 }

@@ -1,6 +1,9 @@
 package model;
 
-import java.util.Date;
+import controller.*;
+import view.*;
+
+import java.util.Calendar;
 
 public class Consulta implements java.io.Serializable{
 	Paciente paciente;
@@ -21,5 +24,13 @@ public class Consulta implements java.io.Serializable{
 		+calendar.get(Calendar.MONTH) +"/"
 		+calendar.get(Calendar.YEAR) +" as "
 		+calendar.get(Calendar.HOUR_OF_DAY);
+	}
+
+	public boolean equals(Consulta outra){
+		return ((this.paciente.equals(outra.paciente) && this.medico.equals(outra.medico)) && 
+		(calendar.get(Calendar.DAY_OF_MONTH) == outra.calendar.get(Calendar.DAY_OF_MONTH)) &&
+		(calendar.get(Calendar.MONTH) == outra.calendar.get(Calendar.MONTH)) &&
+		(calendar.get(Calendar.YEAR) == outra.calendar.get(Calendar.YEAR)) &&
+		(calendar.get(Calendar.HOUR_OF_DAY) == outra.calendar.get(Calendar.HOUR_OF_DAY)));
 	}
 }
