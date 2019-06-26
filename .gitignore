@@ -3,3 +3,6 @@
 
 #ignora a pasta .idea
 .idea/
+
+#ignorar o arquivo
+*.tmp
