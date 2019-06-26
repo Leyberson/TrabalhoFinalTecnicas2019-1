@@ -34,8 +34,6 @@ public class TelaAdmin extends TelaAtendente{
     
     private Alert alertCadastrado, alertDeletado, alertFuncionarioCadastrado,
             alertFuncionarioDeletado;
-
-    AdminControlador admControl = new AdminControlador();
     
     @Override
     public void start(Stage stage) {

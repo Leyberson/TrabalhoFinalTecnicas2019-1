@@ -147,7 +147,7 @@ public class TelaAtendente extends TelaUsuario{
         alertDeletado = new Alert(AlertType.INFORMATION);
         
         // Alertas
-        alert = new Alert(AlertType.WARNING);
+//        alert = new Alert(AlertType.WARNING);
         
         // Incrementação do Menu
         vBoxMenu.getChildren().addAll(btVisualizarConsultas, btTelaConsulta,
@@ -347,8 +347,8 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacCB.setSpacing(10);
 
         // alert
-        alert.setTitle("Erro ao cadastrar");
-        alert.setHeaderText("Usuario ja existente");
+//        alert.setTitle("Erro ao cadastrar");
+//        alert.setHeaderText("Usuario ja existente");
         
         vBoxMedPacDC.setPrefSize(138, 64);
         vBoxMedPacDC.setLayoutX(194);
