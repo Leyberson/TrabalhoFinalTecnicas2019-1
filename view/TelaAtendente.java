@@ -3,6 +3,9 @@ package view;
 import model.*;
 import controller.*;
 
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,9 +47,14 @@ public class TelaAtendente extends TelaUsuario{
 
     private Alert alertCadastradoPaciente, alertPacienteDeletado,
             alertCadastrado, alertDeletado;
-
-
+    
+    protected ArrayList<String> arPacientes, arMedico;
+    
     AtendenteControlador ac = new AtendenteControlador();
+    
+    ArrayList<Usuario> usuarios = ac.usuarios;
+    
+    ArrayList<String> nomePacientes;
     
     @Override
     public void start(Stage stage) {
@@ -107,6 +115,18 @@ public class TelaAtendente extends TelaUsuario{
         txDataHoraConsulta = new TextField();
         txDeletarPaciente = new TextField();
         
+        //comboBox
+        ObservableList<String> pacientes = 
+        FXCollections.observableArrayList(
+            "paciente1",
+            "paciente2"
+        );
+        ObservableList<String> medicos = 
+        FXCollections.observableArrayList(
+            "Medico1",
+            "medico2"
+        );
+        
         // Buttons
         btTelaConsulta = new Button("Consulta");
         btTelaDeletarConsulta = new Button("Deletar Consulta");
@@ -125,8 +145,8 @@ public class TelaAtendente extends TelaUsuario{
         btDeletarPaciente = new Button("Deletar");
         
         // Combo Boxes
-        cbPacientes = new ComboBox();
-        cbMedicos = new ComboBox();
+        cbPacientes = new ComboBox(pacientes);
+        cbMedicos = new ComboBox(medicos);
         cbPacientesConsultados = new ComboBox();
         cbMedicosConsultados = new ComboBox();
         
@@ -174,6 +194,7 @@ public class TelaAtendente extends TelaUsuario{
         paneDeletarPaciente.getChildren().addAll(btDeletarPaciente, 
                 txDeletarPaciente);
     }
+    
     //escutador de atendente  (observer)
     private void initListenersAtendente() {
         // Mudanças de telas
@@ -223,7 +244,11 @@ public class TelaAtendente extends TelaUsuario{
         // Funções dos botões
         
         btCadastrarConsulta.setOnAction((ActionEvent event) -> {
-            System.out.println("Consulta Cadastrada");
+            if(ac.cadastrarConsultas((String) cbPacientes.getValue(), (String) cbMedicos.getValue(), Integer.parseInt(txDataDia.getText())
+                    , Integer.parseInt(txDataMes.getText()), Integer.parseInt(txDataAno.getText()), Integer.parseInt(txDataHora.getText()))){
+                System.out.println("Consulta Cadastrada");
+            }
+            System.out.println("Consulta ja existe ou dados invalidos");
         });
         
         btDeletarConsulta.setOnAction((ActionEvent event) -> {
@@ -347,8 +372,8 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacCB.setSpacing(10);
 
         // alert
-//        alert.setTitle("Erro ao cadastrar");
-//        alert.setHeaderText("Usuario ja existente");
+        //alert.setTitle("Erro ao cadastrar");
+        //alert.setHeaderText("Usuario ja existente");
 
         
         vBoxMedPacDC.setPrefSize(138, 64);

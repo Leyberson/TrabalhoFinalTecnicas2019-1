@@ -33,4 +33,9 @@ public class Consulta implements java.io.Serializable{
 		(calendar.get(Calendar.YEAR) == outra.calendar.get(Calendar.YEAR)) &&
 		(calendar.get(Calendar.HOUR_OF_DAY) == outra.calendar.get(Calendar.HOUR_OF_DAY)));
 	}
+        
+        public boolean depois(Calendar data){
+            return calendar.after(data);
+        }
+        
 }
