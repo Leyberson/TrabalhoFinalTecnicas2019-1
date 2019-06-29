@@ -4,13 +4,13 @@ import view.*;
 import model.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 public class AtendenteControlador{
     ManipulacaoArquivo dados = ManipulacaoArquivo.getInstancia();
     public ArrayList<Usuario> usuarios = dados.lista;
     ArrayList<Consulta> consultas = dados.consultas;
-    Calendar agora;
+    LocalDateTime agora;
     
     public ArrayList getPacientes(){
         ArrayList<String> pacientes = new ArrayList();
@@ -60,16 +60,12 @@ public class AtendenteControlador{
     }
 
     public boolean cadastrarConsultas(String pacienteLogin, String medicoLogin, int dia, int mes, int ano, int hora){
-        if(dia>31 || dia <0 || mes > 12 || mes < 0 || hora < 0 || hora > 24){
+        if(dia>31 || dia <0 || mes > 12 || mes < 0 || hora < 0 || hora > 23){
             return false;
         }
-        agora = Calendar.getInstance();
-        Calendar data = Calendar.getInstance();
-        data.set(Calendar.DAY_OF_MONTH, dia);
-        data.set(Calendar.MONTH, mes);
-	data.set(Calendar.YEAR, ano);
-	data.set(Calendar.HOUR_OF_DAY, hora);
-        if(agora.after(data)){
+        agora = LocalDateTime.now();
+        LocalDateTime consultaHora = LocalDateTime.of(ano, mes, dia, hora, 0);
+        if(agora.isAfter(consultaHora)){
             return false;
         }
         for(Consulta c : consultas){

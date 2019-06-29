@@ -247,8 +247,9 @@ public class TelaAtendente extends TelaUsuario{
             if(ac.cadastrarConsultas((String) cbPacientes.getValue(), (String) cbMedicos.getValue(), Integer.parseInt(txDataDia.getText())
                     , Integer.parseInt(txDataMes.getText()), Integer.parseInt(txDataAno.getText()), Integer.parseInt(txDataHora.getText()))){
                 System.out.println("Consulta Cadastrada");
+            }else{
+                System.out.println("Consulta ja existe ou dados invalidos");
             }
-            System.out.println("Consulta ja existe ou dados invalidos");
         });
         
         btDeletarConsulta.setOnAction((ActionEvent event) -> {
