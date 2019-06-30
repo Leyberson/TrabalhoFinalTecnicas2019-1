@@ -56,5 +56,25 @@ public final class ManipulacaoArquivo{
 		}
 		return instacia;
 	}
+        
+        public static ArrayList<String> getLoginPacientes(){
+            ArrayList<String> loginPacientes = new ArrayList<String>();
+            for(Usuario c : ManipulacaoArquivo.getInstancia().lista){
+                if(c instanceof Paciente){
+                    loginPacientes.add(c.getLogin());
+                }
+            }
+            return loginPacientes;
+        }
+        
+        public static ArrayList<String> getLoginMedicos(){
+            ArrayList<String> loginMedicos = new ArrayList<String>();
+            for(Usuario c : ManipulacaoArquivo.getInstancia().lista){
+                if(c instanceof Medico){
+                    loginMedicos.add(c.getLogin());
+                }
+            }
+            return loginMedicos;
+        }
 	
 }
