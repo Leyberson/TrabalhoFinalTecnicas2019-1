@@ -133,6 +133,9 @@ public class TelaAdmin extends TelaAtendente{
 
             if(cbCargo.getValue() != null && admControl.cadastrarFuncionario((String)cbCargo.getValue(), txCadastrarNomeFuncionario.getText(), txCadastrarLoginFuncionario.getText(), txCadastrarSenhaFuncionario.getText())){
                System.out.println(cbCargo.getValue() +"Cadastrado");
+               ObservableList<String> medicos = 
+               FXCollections.observableArrayList(ManipulacaoArquivo.getLoginMedicos());
+               cbMedicos.setItems(medicos);
             } else if(cbCargo.getValue() == null){
                 System.out.println("Por favor escolha o tipo de funcionario");
             } else {

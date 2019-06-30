@@ -114,18 +114,7 @@ public class TelaAtendente extends TelaUsuario{
         txDataAnoConsulta = new TextField();
         txDataHoraConsulta = new TextField();
         txDeletarPaciente = new TextField();
-        
-        //comboBox
-        ObservableList<String> pacientes = 
-        FXCollections.observableArrayList(
-            "paciente1",
-            "paciente2"
-        );
-        ObservableList<String> medicos = 
-        FXCollections.observableArrayList(
-            "Medico1",
-            "medico2"
-        );
+
         
         // Buttons
         btTelaConsulta = new Button("Consulta");
@@ -145,8 +134,8 @@ public class TelaAtendente extends TelaUsuario{
         btDeletarPaciente = new Button("Deletar");
         
         // Combo Boxes
-        cbPacientes = new ComboBox(pacientes);
-        cbMedicos = new ComboBox(medicos);
+        cbPacientes = new ComboBox(FXCollections.observableArrayList(ManipulacaoArquivo.getLoginPacientes()));
+        cbMedicos = new ComboBox(FXCollections.observableArrayList(ManipulacaoArquivo.getLoginMedicos()));
         cbPacientesConsultados = new ComboBox();
         cbMedicosConsultados = new ComboBox();
         
@@ -270,7 +259,10 @@ public class TelaAtendente extends TelaUsuario{
                 alertCadastrado.showAndWait();
                 txCadastrarNomePaciente.clear();
                 txCadastrarLoginPaciente.clear();
-                txCadastrarSenhaPaciente.clear();                
+                txCadastrarSenhaPaciente.clear();
+                ObservableList<String> pacientes = 
+                FXCollections.observableArrayList(ManipulacaoArquivo.getLoginPacientes());
+                cbPacientes.setItems(pacientes);
             }else{
                 alertCadastradoPaciente.showAndWait();
                 txCadastrarNomePaciente.clear();
