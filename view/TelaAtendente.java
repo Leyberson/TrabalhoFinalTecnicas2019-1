@@ -253,7 +253,12 @@ public class TelaAtendente extends TelaUsuario{
         });
         
         btDeletarConsulta.setOnAction((ActionEvent event) -> {
-            System.out.println("Consulta Deletada");
+            if(ac.deletarConsulta((String) cbPacientesConsultados.getValue(), (String) cbMedicosConsultados.getValue(), Integer.parseInt(txDataDiaConsulta.getText())
+                    , Integer.parseInt(txDataMesConsulta.getText()), Integer.parseInt(txDataAnoConsulta.getText()), Integer.parseInt(txDataHoraConsulta.getText()))){
+                System.out.println("consulta deletada");
+            }else{
+                System.out.println("Consulta Deletada");
+            }
         });
         
         btCadastrarPaciente.setOnAction((ActionEvent event) -> {
