@@ -26,4 +26,8 @@ public class Consulta implements java.io.Serializable{
                     this.horario.equals(outra.horario));
         }
         
+        public String getHora(){
+            return horario.getDayOfMonth() +"/" +horario.getMonth() +"/" +horario.getYear() +"-" +horario.getHour();
+        }
+        
 }
