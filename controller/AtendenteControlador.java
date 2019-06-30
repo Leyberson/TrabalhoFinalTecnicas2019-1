@@ -88,4 +88,16 @@ public class AtendenteControlador{
         return false;
     }
     
+    public boolean deletarConsulta(String pacienteLogin, String medicoLogin, int dia, int mes, int ano, int hora){
+        Consulta deletar = new Consulta(new Paciente("", pacienteLogin, ""),
+                new Medico("", medicoLogin, ""), dia, mes, ano, hora);
+        for(Consulta c : consultas){
+            if(c.equals(deletar)){
+                consultas.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
