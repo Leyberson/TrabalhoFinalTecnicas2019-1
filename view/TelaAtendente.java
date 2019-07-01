@@ -45,8 +45,9 @@ public class TelaAtendente extends TelaUsuario{
 
     protected VBox vBoxMedPacCB, vBoxMedPacDC;
 
-    private Alert alertCadastradoPaciente, alertPacienteDeletado,
-            alertCadastrado, alertDeletado;
+    private Alert alertPacienteJaCadastrado, alertPacienteJaDeletado,
+            alertCadastradoPaciente, alertDeletadoPaciente, alertConsultaJaCadastrada,
+            alertCadastradaConsulta, alertDeletadaConsulta, alertConsultaJaDeletada;
     
     protected ArrayList<String> arPacientes, arMedico;
     
@@ -150,13 +151,15 @@ public class TelaAtendente extends TelaUsuario{
                 txDataAnoConsulta, txDataHoraConsulta);
         
         // Alertas
-        alertCadastradoPaciente = new Alert(AlertType.WARNING);
-        alertPacienteDeletado = new Alert(AlertType.WARNING);
-        alertCadastrado = new Alert(AlertType.INFORMATION);
-        alertDeletado = new Alert(AlertType.INFORMATION);
+        alertCadastradoPaciente = new Alert(AlertType.INFORMATION);
+        alertDeletadoPaciente = new Alert(AlertType.INFORMATION);
+        alertCadastradaConsulta = new Alert(AlertType.INFORMATION);
+        alertDeletadaConsulta = new Alert(AlertType.INFORMATION);
         
-        // Alertas  
-        //alert = new Alert(AlertType.WARNING);
+        alertPacienteJaCadastrado = new Alert(AlertType.WARNING);
+        alertPacienteJaDeletado = new Alert(AlertType.WARNING);
+        alertConsultaJaCadastrada = new Alert(AlertType.WARNING);
+        alertConsultaJaDeletada = new Alert(AlertType.WARNING);
         
         // Incrementação do Menu
         vBoxMenu.getChildren().addAll(btVisualizarConsultas, btTelaConsulta,
@@ -236,8 +239,18 @@ public class TelaAtendente extends TelaUsuario{
             if(ac.cadastrarConsultas((String) cbPacientes.getValue(), (String) cbMedicos.getValue(), Integer.parseInt(txDataDia.getText())
                     , Integer.parseInt(txDataMes.getText()), Integer.parseInt(txDataAno.getText()), Integer.parseInt(txDataHora.getText()))){
                 System.out.println("Consulta Cadastrada");
+                alertCadastradaConsulta.showAndWait();
+                txDataDia.clear();
+                txDataMes.clear();
+                txDataAno.clear();
+                txDataHora.clear();
             }else{
                 System.out.println("Consulta ja existe ou dados invalidos");
+                alertConsultaJaCadastrada.showAndWait();
+                txDataDia.clear();
+                txDataMes.clear();
+                txDataAno.clear();
+                txDataHora.clear();
             }
         });
         
@@ -245,8 +258,18 @@ public class TelaAtendente extends TelaUsuario{
             if(ac.deletarConsulta((String) cbPacientesConsultados.getValue(), (String) cbMedicosConsultados.getValue(), Integer.parseInt(txDataDiaConsulta.getText())
                     , Integer.parseInt(txDataMesConsulta.getText()), Integer.parseInt(txDataAnoConsulta.getText()), Integer.parseInt(txDataHoraConsulta.getText()))){
                 System.out.println("consulta deletada");
+                alertDeletadaConsulta.showAndWait();
+                txDataDiaConsulta.clear();
+                txDataMesConsulta.clear();
+                txDataAnoConsulta.clear();
+                txDataHoraConsulta.clear();
             }else{
                 System.out.println("Consulta Deletada");
+                alertConsultaJaDeletada.showAndWait();
+                txDataDiaConsulta.clear();
+                txDataMesConsulta.clear();
+                txDataAnoConsulta.clear();
+                txDataHoraConsulta.clear();
             }
         });
         
@@ -256,7 +279,7 @@ public class TelaAtendente extends TelaUsuario{
             if(ac.cadastrarPaciente(txCadastrarNomePaciente.getText(), 
                     txCadastrarLoginPaciente.getText(), 
                     txCadastrarSenhaPaciente.getText())){
-                alertCadastrado.showAndWait();
+                alertCadastradoPaciente.showAndWait();
                 txCadastrarNomePaciente.clear();
                 txCadastrarLoginPaciente.clear();
                 txCadastrarSenhaPaciente.clear();
@@ -264,7 +287,7 @@ public class TelaAtendente extends TelaUsuario{
                 FXCollections.observableArrayList(ManipulacaoArquivo.getLoginPacientes());
                 cbPacientes.setItems(pacientes);
             }else{
-                alertCadastradoPaciente.showAndWait();
+                alertPacienteJaCadastrado.showAndWait();
                 txCadastrarNomePaciente.clear();
                 txCadastrarLoginPaciente.clear();
                 txCadastrarSenhaPaciente.clear();
@@ -276,10 +299,10 @@ public class TelaAtendente extends TelaUsuario{
         btDeletarPaciente.setOnAction((ActionEvent event) -> {
             if(ac.deletarPaciente(txDeletarPaciente.getText())){
 
-                alertDeletado.showAndWait();
+                alertDeletadoPaciente.showAndWait();
                 txDeletarPaciente.clear();
             }else{
-                alertPacienteDeletado.showAndWait();
+                alertPacienteJaDeletado.showAndWait();
                 txDeletarPaciente.clear();
 
             }
@@ -380,17 +403,29 @@ public class TelaAtendente extends TelaUsuario{
         vBoxMedPacDC.setSpacing(10);
 
         // alerts
-        alertCadastradoPaciente.setTitle("Erro ao Cadastrar");
-        alertCadastradoPaciente.setHeaderText("Usuario ja existente!");
+        alertCadastradoPaciente.setTitle("Cadastro");
+        alertCadastradoPaciente.setHeaderText("Usuario cadastrado com sucesso!");
         
-        alertCadastrado.setTitle("Cadastro");
-        alertCadastrado.setHeaderText("Usuario cadastrado com sucesso!");
+        alertPacienteJaCadastrado.setTitle("Erro ao cadastrar");
+        alertPacienteJaCadastrado.setHeaderText("Usuario ja existente ou invalido!");
         
-        alertDeletado.setTitle("Deletado");
-        alertDeletado.setHeaderText("Usuario deletado com sucesso!");
+        alertDeletadoPaciente.setTitle("Deletado");
+        alertDeletadoPaciente.setHeaderText("Usuario deletado com sucesso!");
         
-        alertPacienteDeletado.setTitle("Erro ao Deletar");
-        alertPacienteDeletado.setHeaderText("Usuario inexistente!");
+        alertPacienteJaDeletado.setTitle("Erro ao Deletar");
+        alertPacienteJaDeletado.setHeaderText("Usuario invalido ou inexistente!");
+        
+        alertCadastradaConsulta.setTitle("Cadastrado");
+        alertCadastradaConsulta.setHeaderText("Consulta cadastrada com sucesso!");
+        
+        alertConsultaJaCadastrada.setTitle("Erro ao Cadastrar");
+        alertConsultaJaCadastrada.setHeaderText("Consula ja existente ou invalida!");
+        
+        alertDeletadaConsulta.setTitle("Deletado");
+        alertDeletadaConsulta.setHeaderText("Consulta deletada com sucesso!");
+        
+        alertConsultaJaDeletada.setTitle("Erro ao deletar");
+        alertConsultaJaDeletada.setHeaderText("Consulta invalida ou inexistente");
         
     }
     
