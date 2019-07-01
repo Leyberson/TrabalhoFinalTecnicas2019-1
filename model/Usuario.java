@@ -18,6 +18,10 @@ public abstract class Usuario implements java.io.Serializable{
     public boolean equals(Usuario outra){
         return this.getLogin().equalsIgnoreCase(outra.getLogin());
     }
+    
+    public String toString(){
+        return this.getLogin();
+    }
 
     public abstract boolean logar(String login, String senha) throws Exception;
 

@@ -4,13 +4,16 @@ import controller.*;
 import model.*;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,7 +29,8 @@ public class TelaUsuario extends Application {
     protected VBox vBoxMenu, vBoxMedPac;
     protected ToggleGroup rbGroup;
     protected HBox hBoxFiltro;
-    protected TableView tbConsultas;
+    protected TableView<Consulta> tbConsultas;
+    protected TableColumn tbMedico, tbPaciente, tbDataHora;
     protected RadioButton rbPaciente, rbMedico;
     protected Button btLogout, btPesquisarConsulta;
     protected TextField txFiltro;
@@ -59,6 +63,18 @@ public class TelaUsuario extends Application {
         
         // Table
         tbConsultas = new TableView();
+        
+        tbMedico = new TableColumn("Medico");
+        tbPaciente = new TableColumn("Paciente");
+        tbDataHora = new TableColumn("Data/Hora");
+        
+        tbPaciente.setCellValueFactory(new PropertyValueFactory<>("pacienteLogin"));
+        tbMedico.setCellValueFactory(new PropertyValueFactory<>("medicoLogin"));
+        tbDataHora.setCellValueFactory(new PropertyValueFactory<>("horario"));
+        
+        tbConsultas.setItems(FXCollections.observableArrayList(ManipulacaoArquivo.getInstancia().consultas));
+        
+        tbConsultas.getColumns().addAll(tbPaciente, tbMedico, tbDataHora);
         
         // Boxes
         vBoxMenu = new VBox();
