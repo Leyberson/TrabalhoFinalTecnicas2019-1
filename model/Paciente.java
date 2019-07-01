@@ -12,7 +12,7 @@ public class Paciente extends Usuario{
 	public boolean logar(String login, String senha) throws Exception{
 		if(this.getLogin().equalsIgnoreCase(login) && this.senha.equals(senha)){
 			try{
-				TelaUsuario tUsr = new TelaUsuario();
+				TelaUsuario tUsr = new TelaUsuario(this);
 				return true;
 			}catch(Exception e){
 				throw new Exception();

@@ -12,7 +12,7 @@ public class Admin extends Atendente{
     public boolean logar(String login, String senha) throws Exception{
 		if(this.getLogin().equalsIgnoreCase(login) && this.senha.equals(senha)){
             try{
-    			TelaAdmin tAdm = new TelaAdmin();
+    			TelaAdmin tAdm = new TelaAdmin(this);
 	    		return true;
             }catch(Exception e){
                 throw new Exception();

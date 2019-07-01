@@ -25,6 +25,7 @@ import javafx.stage.Stage;
  */
 //inicialização do painel 
 public class TelaUsuario extends Application {
+    protected Usuario user;
     protected AnchorPane paneUsuario;
     protected VBox vBoxMenu, vBoxMedPac;
     protected ToggleGroup rbGroup;
@@ -72,7 +73,7 @@ public class TelaUsuario extends Application {
         tbMedico.setCellValueFactory(new PropertyValueFactory<>("medicoLogin"));
         tbDataHora.setCellValueFactory(new PropertyValueFactory<>("horario"));
         
-        tbConsultas.setItems(FXCollections.observableArrayList(ManipulacaoArquivo.getInstancia().consultas));
+        tbConsultas.setItems(FXCollections.observableArrayList(ManipulacaoArquivo.getConsulta(user)));
         
         tbConsultas.getColumns().addAll(tbPaciente, tbMedico, tbDataHora);
         
@@ -187,7 +188,8 @@ public class TelaUsuario extends Application {
         }
     }
     
-    public TelaUsuario(){
+    public TelaUsuario(Usuario user){
+        this.user = user;
         this.start(new Stage());
     }
 }

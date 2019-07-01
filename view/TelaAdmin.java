@@ -221,7 +221,7 @@ public class TelaAdmin extends TelaAtendente{
         
     }
     
-    public TelaAdmin(){
-        super();
+    public TelaAdmin(Usuario user){
+        super(user);
     }
 }

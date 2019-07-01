@@ -429,7 +429,7 @@ public class TelaAtendente extends TelaUsuario{
         
     }
     
-    public TelaAtendente(){
-        super();
+    public TelaAtendente(Usuario user){
+        super(user);
     }
 }

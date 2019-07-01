@@ -76,5 +76,35 @@ public final class ManipulacaoArquivo{
             }
             return loginMedicos;
         }
+        
+        public static ArrayList<Consulta> getConsulta(Usuario user){
+            if(user instanceof Paciente){
+                return getConsultaPaciente(user);
+            }
+            if(user instanceof Medico){
+                return getConsultaMedico(user);
+            }
+            return ManipulacaoArquivo.getInstancia().consultas;
+        }
+        
+        public static ArrayList<Consulta> getConsultaPaciente(Usuario paciente){
+            ArrayList<Consulta> consultasPaciente = new ArrayList<Consulta>();
+            for(Consulta c : ManipulacaoArquivo.getInstancia().consultas){
+                if(c.paciente.equals(paciente)){
+                    consultasPaciente.add(c);
+                }
+            }
+            return consultasPaciente;
+        }
+        
+        public static ArrayList<Consulta> getConsultaMedico(Usuario medico){
+            ArrayList<Consulta> consultasPaciente = new ArrayList<Consulta>();
+            for(Consulta c : ManipulacaoArquivo.getInstancia().consultas){
+                if(c.medico.equals(medico)){
+                    consultasPaciente.add(c);
+                }
+            }
+            return consultasPaciente;
+        }
 	
 }
